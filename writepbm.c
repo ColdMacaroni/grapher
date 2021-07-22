@@ -40,7 +40,7 @@ void writePbm(point_t *points, int points_n)
 {
     if (points_n <= 0)
     {
-        perror("Can't write an image of 0 pixels");
+        fprintf(stderr, "Can't write an image of 0 pixels\n");
         exit(EXIT_FAILURE);
     }
 
