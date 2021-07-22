@@ -12,6 +12,9 @@ _point
     int y;
 } point;
 
+int
+peek(FILE *stream);
+
 point
 inputPoint(void);
 
@@ -21,9 +24,38 @@ strToInt(char *str, int len);
 int
 main()
 {
-    point sample = inputPoint();
-    printf("x: %d\ny: %d\n", sample.x, sample.y);
+    // This array will store all points
+    point *points = malloc(sizeof(point));
+    int points_n = 0;
+
+    puts("Enter coordinates in format (x, y)");
+    puts("Blank lines will be considered (0, 0)");
+    puts("Enter EOF to stop input.")
+    while (peek(stdin) != EOF)
+    {
+        // Store the points in array
+        points[points_n] = inputPoint();
+        points_n++;
+        points = realloc(points, (points_n + 1) * sizeof(point));
+    }
+
+    printf("%d points\n", points_n);
+
+    free(points);
     return(0);
+}
+
+int
+peek(FILE *stream)
+{
+    /* Looks at the next char in the stream */
+    // From https://stackoverflow.com/a/2082772
+    int c;
+
+    c = fgetc(stream);
+    ungetc(c, stream);
+
+    return c;
 }
 
 point
@@ -36,6 +68,7 @@ inputPoint(void)
     int x = 0;
     int y = 0;
 
+    // First start with x
     int *coord = &x;
 
     fgets(input, BUFSIZ, stdin);
