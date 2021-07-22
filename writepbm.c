@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "points.h"
 
 /* Example pbm file format from
@@ -37,9 +38,14 @@
 
 void writePbm(point_t *points, int points_n)
 {
-    if 
-    int width = points[0];
-    int height;
+    if (points_n <= 0)
+    {
+        perror("Can't write an image of 0 pixels");
+        exit(EXIT_FAILURE);
+    }
+
+    int width = points[0].x;
+    int height = points[0].y;
 
     // Calculate width and height
 }

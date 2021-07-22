@@ -33,8 +33,6 @@ main()
         points = realloc(points, (points_n + 1) * sizeof(point_t));
     }
 
-    printf("%d points\n", points_n);
-
     writePbm(points, points_n);
 
     free(points);
