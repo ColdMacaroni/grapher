@@ -1,4 +1,5 @@
 *
-!Makefile
 !.gitignore
+!Makefile
 !grapher.c
+!points.h
