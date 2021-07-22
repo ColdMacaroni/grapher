@@ -45,10 +45,11 @@ inputPoint(void)
     // Store digits in a char array
     for (int i = 0; input[i + 1] != '\0'; i++)
     {
-        // Skip brackets and space in points (x, y) comma to be handled separately
+        // Skip brackets and space in points (x, y)
         if (!isdigit(input[i]) && input[i] != ',')
             continue;
 
+        // Comma signifies different num
         if (input[i] == ',')
         {
             // Convert to int
@@ -56,6 +57,7 @@ inputPoint(void)
 
             // Reset stuff
             num_len = 0;
+            free(num);
             num = malloc(sizeof(char));
 
             // Now store y
@@ -74,15 +76,15 @@ inputPoint(void)
         num = realloc(num, (num_len + 1) * sizeof(char));
     }
 
+    // For loop will end with num storing the second number.
+    *coord = strToInt(num, num_len);
     free(num);
 
-    // Placeholder
     point pt = {
         .x = x,
         .y = y
     };
-
-    return pt;
+    return(pt);
 }
 
 int
