@@ -2,7 +2,9 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdlib.h>
+
 #include "points.h"
+#include "writepbm.h"
 
 int
 peek(FILE *stream);
@@ -32,6 +34,8 @@ main()
     }
 
     printf("%d points\n", points_n);
+
+    writePbm(points, points_n);
 
     free(points);
     return(0);

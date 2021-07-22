@@ -34,3 +34,5 @@
  * the given array setting the specific bits to 1.
  * It iwll then write it to a pbm file.
  */
+
+void writePbm(point_t *points, int point_num);
