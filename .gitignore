@@ -3,3 +3,4 @@
 !Makefile
 !grapher.c
 !points.h
+!writepbm.c
