@@ -37,5 +37,7 @@
 
 void writePbm(point_t *points, int point_num)
 {
-    ;
+    int width;
+    int height;
+    // Calculate width and height
 }
