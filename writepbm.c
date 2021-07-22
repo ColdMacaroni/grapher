@@ -35,9 +35,11 @@
  * It iwll then write it to a pbm file.
  */
 
-void writePbm(point_t *points, int point_num)
+void writePbm(point_t *points, int points_n)
 {
-    int width;
+    if 
+    int width = points[0];
     int height;
+
     // Calculate width and height
 }
