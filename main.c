@@ -2,19 +2,12 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdlib.h>
-
-typedef
-struct
-_point
-{
-    int x;
-    int y;
-} point;
+#include "points.h"
 
 int
 peek(FILE *stream);
 
-point
+point_t
 inputPoint(void);
 
 int
@@ -24,7 +17,7 @@ int
 main()
 {
     // This array will store all points
-    point *points = malloc(sizeof(point));
+    point_t *points = malloc(sizeof(point_t));
     int points_n = 0;
 
     puts("Enter coordinates in format (x, y)");
@@ -35,7 +28,7 @@ main()
         // Store the points in array
         points[points_n] = inputPoint();
         points_n++;
-        points = realloc(points, (points_n + 1) * sizeof(point));
+        points = realloc(points, (points_n + 1) * sizeof(point_t));
     }
 
     printf("%d points\n", points_n);
@@ -57,7 +50,7 @@ peek(FILE *stream)
     return c;
 }
 
-point
+point_t
 inputPoint(void)
 {
     char input[BUFSIZ];
@@ -112,7 +105,7 @@ inputPoint(void)
     *coord = strToInt(num, num_len);
     free(num);
 
-    point pt = {
+    point_t pt = {
         .x = x,
         .y = y
     };
