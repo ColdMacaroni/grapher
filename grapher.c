@@ -30,7 +30,7 @@ main()
 
     puts("Enter coordinates in format (x, y)");
     puts("Blank lines will be considered (0, 0)");
-    puts("Enter EOF to stop input.")
+    puts("Enter EOF to stop input.");
     while (peek(stdin) != EOF)
     {
         // Store the points in array
