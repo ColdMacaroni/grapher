@@ -1,5 +1,8 @@
-grapher:
-	clang -Wall -Wextra -pedantic -o grapher grapher.c -lm
+grapher: main.o
+	clang -o grapher main.o
+
+main.o:
+	clang -Wall -Wextra -pedantic -c main.c -lm
 
 clean:
-	rm grapher
+	rm grapher main.o
