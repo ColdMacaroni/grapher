@@ -1,22 +1,32 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
+#include <math.h>
 
-typedef struct _point
+typedef
+struct
+_point
 {
     int x;
     int y;
 } point;
 
-point inputPoint(void);
+point
+inputPoint(void);
 
-int main()
+int
+strToInt(char *str, int len);
+
+int
+main()
 {
     point sample = inputPoint();
     printf("x: %d\ny: %d\n", sample.x, sample.y);
     return(0);
 }
 
-point inputPoint(void)
+point
+inputPoint(void)
 {
     char input[BUFSIZ];
 
@@ -32,10 +42,24 @@ point inputPoint(void)
             input[i] == ' ')
             continue;
 
-        putchar('a');
+
     }
 
     point hi;
     hi.x = 2; hi.y=3;
     return hi;
+}
+
+int
+strToInt(char *str, int len)
+{
+    int digits = len - 1;
+    int num = 0;
+
+    for (int i = 0; i < len; i++)
+    {
+        num += (str[i] - '0') * pow(10, digits - i);
+    }
+
+    return(num);
 }
