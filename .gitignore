@@ -1,7 +1,2 @@
-*
-!.gitignore
-!Makefile
-!grapher.c
-!points.h
-!writepbm.c
-!writepbm.h
+*.o
+grapher
