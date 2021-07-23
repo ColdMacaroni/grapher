@@ -18,9 +18,9 @@ strToInt(char *str, int len);
 int
 main()
 {
-    // This array will store all points
-    point_t *points = malloc(sizeof(point_t));
-    int points_n = 0;
+    // Create head of linked list
+    node_t *head = NULL;
+    point_t tmp;
 
     puts("Enter coordinates in format (x, y)");
     puts("Blank lines will be considered (0, 0)");
@@ -28,14 +28,14 @@ main()
     while (peek(stdin) != EOF)
     {
         // Store the points in array
-        points[points_n] = inputPoint();
+        tmp = inputPoint();
         points_n++;
         points = realloc(points, (points_n + 1) * sizeof(point_t));
     }
 
     writePbm(points, points_n);
 
-    free(points);
+    freeLinked(head);
     return(0);
 }
 
