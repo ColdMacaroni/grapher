@@ -38,14 +38,29 @@
 
 void writePbm(node_t *head, char *filename)
 {
-    if (points_n <= 0)
+    if (head == NULL)
     {
         fprintf(stderr, "Can't write an image of 0 pixels\n");
         exit(EXIT_FAILURE);
     }
 
-    int width = points[0].x;
-    int height = points[0].y;
+    // Sep pointer for looping as to not lose the head.
+    node_t *loop_ptr;
+
+    // Initialize min and max variables to first element
+    int min_x, max_x = head->coord.x;
+    int min_y, max_y = head->coord.y;
+
+    // Get minimum and maximum x and y.
+    // Will be used for calculating the size of the image
+    loop_ptr = head;
+    while (loop_ptr != NULL)
+    {
+        
+    }
+
+    /* int width = points[0].x; */
+    /* int height = points[0].y; */
 
     // Calculate width and height
 }
