@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "points.h"
 #include "writepbm.h"
@@ -58,7 +59,7 @@ inputPoint(void)
     int num_len = 0;
     char *num = malloc(sizeof(char));
 
-    signed short int sign = 1;
+    bool negative = false;
 
     int x = 0;
     int y = 0;
@@ -83,24 +84,26 @@ inputPoint(void)
         if (input[i] == '-')
         {
             // Yes, this means that "--11" will become -11. No, it's a feature.
-            sign = -1;
+            negative = true;
             continue;
         }
         // Comma signifies different num
         else if (input[i] == ',')
         {
             // Convert to int
-            *coord = strToInt(num, num_len) * sign;
+            *coord = strToInt(num, num_len);
+
+            if (negative)
+                *coord *= -1;
 
             // Reset stuff
-            sign = -1;
+            negative = false;
             num_len = 0;
             free(num);
             num = malloc(sizeof(char));
 
             // Now store y
             coord = &y;
-            printf("COMMA\n");
 
             continue;
         }
@@ -117,9 +120,12 @@ inputPoint(void)
 
     // For loop will end with num storing the second number.
     *coord = strToInt(num, num_len);
+    if (negative)
+        *coord *= -1;
+
     free(num);
 
-    printf("%d\n", y);
+    /* printf("(%d, %d)\n", x, y); */
 
     point_t pt = {
         .x = x,
