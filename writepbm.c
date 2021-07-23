@@ -83,7 +83,8 @@ void writePbm(node_t *head, char *filename)
         node_ptr = node_ptr->next;
     }
 
-    printf("\tX\tY\nMin\t%d\t%d\nMax\t%d\t%d\n", min_x, min_y, max_x, max_y);
+    // This line prints min and max for x and y in a table
+    // printf("\tX\tY\nMin\t%d\t%d\nMax\t%d\t%d\n", min_x, min_y, max_x, max_y);
 
     /* int width = points[0].x; */
     /* int height = points[0].y; */
