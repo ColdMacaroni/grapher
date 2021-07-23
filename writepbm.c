@@ -54,18 +54,32 @@ void shiftCoords(node_t *head, int min_x, int min_y)
         if (shift_y)
             tmp->coord.y -= min_y;
 
+        printf("(%d, %d), ", tmp->coord.x, tmp->coord.y);
+
         tmp = tmp->next;
     }
+    putchar('\n');
 }
 
 
 void invertY(node_t *head, unsigned int height)
 {
+    /* Invert the Y axis for compliance with pbm format */
+    node_t *tmp = head;
 
+    while (tmp != NULL)
+    {
+        tmp->coord.y = height - tmp->coord.y;
+        printf("(%d, %d), ", tmp->coord.x, tmp->coord.y);
+
+        tmp = tmp->next;
+    }
+    putchar('\n');
 }
 
 void writePbm(node_t *head, char *filename)
 {
+    // TODO: Add a padding of 1px
     if (head == NULL)
     {
         fprintf(stderr, "Can't write an image of 0 pixels\n");
@@ -132,6 +146,9 @@ void writePbm(node_t *head, char *filename)
 
     // Get rid of negative numbers
     shiftCoords(head, min_x, min_y);
+
+    // Y axis
+    invertY(head, height);
 
     /* Alloc for the img file
      * Magic:   3   P1\n
