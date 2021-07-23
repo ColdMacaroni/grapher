@@ -48,16 +48,29 @@ void writePbm(node_t *head, char *filename)
     node_t *loop_ptr;
 
     // Initialize min and max variables to first element
-    int min_x, max_x = head->coord.x;
-    int min_y, max_y = head->coord.y;
+    int min_x, max_x;
+    int min_y, max_y;
+
+    int ptr_x;
+    int ptr_y;
+
+    min_x = max_x = head->coord.x;
+    min_y = max_y = head->coord.y;
+
 
     // Get minimum and maximum x and y.
     // Will be used for calculating the size of the image
     loop_ptr = head;
     while (loop_ptr != NULL)
     {
+        // Store them for quicker accessing
+        ptr_x = loop_ptr->coord.x
+        ptr_y = loop_ptr->coord.y
+
         
     }
+
+    printf("\tX\tY\nMin\t%d\t%d\nMax\t%d\t%d\n", min_x, min_y, max_x, max_y);
 
     /* int width = points[0].x; */
     /* int height = points[0].y; */
