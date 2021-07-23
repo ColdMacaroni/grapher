@@ -96,5 +96,6 @@ void writePbm(node_t *head, char *filename)
     width = max_x - min_x  + 1;
     height = max_y - min_y + 1;
 
-    printf("%s: %dx%dpx\n", filename, width, height);
+    // This prints the img size
+    /* printf("%s: %dx%dpx\n", filename, width, height); */
 }
