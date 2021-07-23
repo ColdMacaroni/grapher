@@ -67,7 +67,17 @@ void writePbm(node_t *head, char *filename)
         ptr_x = loop_ptr->coord.x
         ptr_y = loop_ptr->coord.y
 
-        
+        /* X */
+        if (min_x > ptr_x)
+            min_x = ptr_x;
+        else if (max_x < ptr_x)
+            max_x = ptr_x;
+
+        /* Y */
+        if (min_y > ptr_y)
+            min_y = ptr_y;
+        else if (may_y < ptr_y)
+            may_y = ptr_y;
     }
 
     printf("\tX\tY\nMin\t%d\t%d\nMax\t%d\t%d\n", min_x, min_y, max_x, max_y);
