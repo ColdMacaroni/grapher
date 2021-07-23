@@ -82,8 +82,8 @@ inputPoint(void)
         // Minus sign handling
         if (input[i] == '-')
         {
-            // Yes, this means that "-1--1" will become -11. No, it's a feature.
-            sign *= -1;
+            // Yes, this means that "--11" will become -11. No, it's a feature.
+            sign = -1;
             continue;
         }
         // Comma signifies different num
@@ -93,13 +93,14 @@ inputPoint(void)
             *coord = strToInt(num, num_len) * sign;
 
             // Reset stuff
-            sign = 1;
+            sign = -1;
             num_len = 0;
             free(num);
             num = malloc(sizeof(char));
 
             // Now store y
             coord = &y;
+            printf("COMMA\n");
 
             continue;
         }
@@ -118,10 +119,13 @@ inputPoint(void)
     *coord = strToInt(num, num_len);
     free(num);
 
+    printf("%d\n", y);
+
     point_t pt = {
         .x = x,
         .y = y
     };
+
     return(pt);
 }
 

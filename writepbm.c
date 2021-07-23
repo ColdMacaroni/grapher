@@ -51,8 +51,11 @@ void shiftCoords(node_t *head, int min_x, int min_y)
     {
         if (shift_x)
             tmp->coord.x -= min_x;
+
         if (shift_y)
+        {
             tmp->coord.y -= min_y;
+        }
 
         printf("(%d, %d), ", tmp->coord.x, tmp->coord.y);
 
