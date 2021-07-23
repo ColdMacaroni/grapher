@@ -80,7 +80,7 @@ inputPoint(void)
             continue;
 
         // Minus sign handling
-        if (input[i] = '-')
+        if (input[i] == '-')
         {
             // Yes, this means that "-1--1" will become -11. No, it's a feature.
             sign *= -1;
@@ -93,7 +93,7 @@ inputPoint(void)
             *coord = strToInt(num, num_len) * sign;
 
             // Reset stuff
-            sign = 1
+            sign = 1;
             num_len = 0;
             free(num);
             num = malloc(sizeof(char));
