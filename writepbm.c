@@ -47,6 +47,8 @@ void writePbm(node_t *head, char *filename)
     // Sep pointer for looping to not lose the head.
     node_t *node_ptr;
 
+    int width, height;
+
     // Initialize min and max variables to first element
     int min_x, max_x;
     int min_y, max_y;
@@ -90,4 +92,8 @@ void writePbm(node_t *head, char *filename)
     /* int height = points[0].y; */
 
     // Calculate width and height
+    width = max_x - min_x;
+    height = max_y - min_y;
+
+    printf("%s: %dx%dpx\n", filename, width, height);
 }
