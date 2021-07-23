@@ -2,7 +2,8 @@
 #include "points.h"
 
 // Most linked list stuff from jacob sorber on yt
-node_t *createNode(point_t value)
+node_t
+*createNode(point_t value)
 {
     /* Creates a new node with a NULL pointer by default */
 
@@ -18,7 +19,8 @@ node_t *createNode(point_t value)
     return(new_node);
 }
 
-void insertNode(node_t **head, node_t *to_insert)
+void
+insertNode(node_t **head, node_t *to_insert)
 {
     /* Insert node to the start of the linked list */
     /* Head is a pointer pointer so that it doesnt have to be returned
@@ -29,4 +31,22 @@ void insertNode(node_t **head, node_t *to_insert)
 
     // Reassign head
     *head = to_insert;
+}
+
+void
+freeLinked(node_t *head)
+{
+    node_t *tmp;
+    /* Frees a linked list from memory */
+    while (head != NULL)
+    {
+        // Store the current head
+        tmp = head;
+
+        // Change the current head to the next node
+        head = head->next;
+
+        // Free the current node
+        free(tmp);
+    }
 }

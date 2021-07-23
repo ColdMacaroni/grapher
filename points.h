@@ -18,7 +18,13 @@ _node
     struct _node *next;
 } node_t;
 
-node_t *createNode(point_t value);
-void insertNode(node_t **head, node_t *to_insert);
+node_t
+*createNode(point_t value);
+
+void
+insertNode(node_t **head, node_t *to_insert);
+
+void
+freeLinked(node_t *head)
 
 #endif
