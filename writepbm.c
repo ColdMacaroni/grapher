@@ -36,7 +36,7 @@
  * It iwll then write it to a pbm file.
  */
 
-void writePbm(point_t *points, int points_n)
+void writePbm(node_t *head, char *filename)
 {
     if (points_n <= 0)
     {
