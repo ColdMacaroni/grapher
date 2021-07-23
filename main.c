@@ -58,6 +58,8 @@ inputPoint(void)
     int num_len = 0;
     char *num = malloc(sizeof(char));
 
+    signed short int sign = 1;
+
     int x = 0;
     int y = 0;
 
@@ -72,16 +74,26 @@ inputPoint(void)
     for (int i = 0; input[i + 1] != '\0'; i++)
     {
         // Skip brackets and space in points (x, y)
-        if (!isdigit(input[i]) && input[i] != ',')
+        if (!isdigit(input[i]) &&
+            input[i] != ',' &&
+            input[i] != '-')
             continue;
 
+        // Minus sign handling
+        if (input[i] = '-')
+        {
+            // Yes, this means that "-1--1" will become -11. No, it's a feature.
+            sign *= -1;
+            continue;
+        }
         // Comma signifies different num
-        if (input[i] == ',')
+        else if (input[i] == ',')
         {
             // Convert to int
-            *coord = strToInt(num, num_len);
+            *coord = strToInt(num, num_len) * sign;
 
             // Reset stuff
+            sign = 1
             num_len = 0;
             free(num);
             num = malloc(sizeof(char));
@@ -119,10 +131,11 @@ strToInt(char *str, int len)
     /* Convert an array of chars to int */
     int digits = len - 1;
     int num = 0;
+    const int base = 10;
 
     for (int i = 0; i < len; i++)
     {
-        num += (str[i] - '0') * pow(10, digits - i);
+        num += (str[i] - '0') * pow(base, digits - i);
     }
 
     return(num);
