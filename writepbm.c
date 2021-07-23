@@ -92,8 +92,9 @@ void writePbm(node_t *head, char *filename)
     /* int height = points[0].y; */
 
     // Calculate width and height
-    width = max_x - min_x;
-    height = max_y - min_y;
+    // Must add one because we are counting 0 as a position.
+    width = max_x - min_x  + 1;
+    height = max_y - min_y + 1;
 
     printf("%s: %dx%dpx\n", filename, width, height);
 }
