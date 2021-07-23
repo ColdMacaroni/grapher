@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 #include "points.h"
 
 /* Example pbm file format from
@@ -36,6 +38,18 @@
  * It iwll then write it to a pbm file.
  */
 
+void shiftCoords(node_t *head, int min_x, int min_y)
+{
+    /* Will shift coordinates from negative to positive */
+
+}
+
+
+void invertY(node_t *head, int max_y)
+{
+
+}
+
 void writePbm(node_t *head, char *filename)
 {
     if (head == NULL)
@@ -47,7 +61,7 @@ void writePbm(node_t *head, char *filename)
     // Sep pointer for looping to not lose the head.
     node_t *node_ptr;
 
-    int width, height;
+    unsigned int width, height;
 
     // Initialize min and max variables to first element
     int min_x, max_x;
@@ -55,6 +69,9 @@ void writePbm(node_t *head, char *filename)
 
     int ptr_x;
     int ptr_y;
+
+    char *img_content;
+    unsigned int file_len;
 
     min_x = max_x = head->coord.x;
     min_y = max_y = head->coord.y;
@@ -98,4 +115,27 @@ void writePbm(node_t *head, char *filename)
 
     // This prints the img size
     /* printf("%s: %dx%dpx\n", filename, width, height); */
+
+    /* Alloc for the img file
+     * Magic:   3   P1\n
+     * Size:    22  len(max_int) is 10 so "10 10 \n"
+     * (width * height) + height for final \n
+     */
+
+    // Initialize
+    file_len = 3 + 22 + (width * height) + height + 1;
+    img_content = calloc(sizeof(char), file_len);
+    memset(img_content, '\0', sizeof(char) * file_len);
+
+    // Add magic bytes and size to start of file
+    strcat(img_content, "P1\n");
+    {
+        char size_str[23];
+        sprintf(size_str, "%d %d\n", width, height);
+        strcat(img_content, size_str);
+    }
+
+    printf("%s", img_content);
+
+    free(img_content);
 }
