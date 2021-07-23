@@ -41,11 +41,25 @@
 void shiftCoords(node_t *head, int min_x, int min_y)
 {
     /* Will shift coordinates from negative to positive */
+    // Store this early so that the comparison is run only once
+    const bool shift_x = min_x < 0;
+    const bool shift_y = min_y < 0;
 
+    node_t *tmp = head;
+
+    while (tmp != NULL)
+    {
+        if (shift_x)
+            tmp->coord.x -= min_x;
+        if (shift_y)
+            tmp->coord.y -= min_y;
+
+        tmp = tmp->next;
+    }
 }
 
 
-void invertY(node_t *head, int max_y)
+void invertY(node_t *head, unsigned int height)
 {
 
 }
@@ -115,6 +129,9 @@ void writePbm(node_t *head, char *filename)
 
     // This prints the img size
     /* printf("%s: %dx%dpx\n", filename, width, height); */
+
+    // Get rid of negative numbers
+    shiftCoords(head, min_x, min_y);
 
     /* Alloc for the img file
      * Magic:   3   P1\n
