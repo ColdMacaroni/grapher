@@ -27,13 +27,12 @@ main()
     puts("Enter EOF to stop input.");
     while (peek(stdin) != EOF)
     {
-        // Store the points in array
+        // Get a point and inserrt a node created from it until EOF
         tmp = inputPoint();
-        points_n++;
-        points = realloc(points, (points_n + 1) * sizeof(point_t));
+        insertNode(&head, createNode(tmp));
     }
 
-    writePbm(points, points_n);
+    writePbm(head, "graph.pbm");
 
     freeLinked(head);
     return(0);

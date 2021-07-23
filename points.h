@@ -25,6 +25,6 @@ void
 insertNode(node_t **head, node_t *to_insert);
 
 void
-freeLinked(node_t *head)
+freeLinked(node_t *head);
 
 #endif
