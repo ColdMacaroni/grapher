@@ -84,16 +84,26 @@ void invertY(node_t *head, unsigned int height)
 char
 *generateContent(node_t *head, unsigned int width_a, unsigned int height_a)
 {
+    // Turn em into constants
     const unsigned int width = width_a;
     const unsigned int height = height_a;
 
+    // All the text
     char *img_content;
+    const char bg = '0';
+    const char fg = '1';
 
+    // magic
     const unsigned int file_len = 3 + 22 + (width * height) + height + 1;
     char size_str[23];
 
+    // actual pixels
     const unsigned int pixels_len = (width * height) + height + 1;
     char pixels[pixels_len];
+
+    // To be used during loop
+    node_t *node_ptr = head;
+    unsigned int pos;
 
     /* Alloc for the img file
      * Magic:   3   P1\n
@@ -113,22 +123,25 @@ char
 
     /* printf("%s", img_content); */
     // Calc size plus newlines plus null
-    memset(pixels, '0', sizeof(char) * pixels_len);
+    memset(pixels, bg, sizeof(char) * pixels_len);
 
     // Set the terminating null char
     pixels[pixels_len - 1] = '\0';
 
     // Set the newlines
-    // I'm not sure why width has to be +1 but that makes it work
-    for (unsigned int row = width ; row < pixels_len; row += width + 1)
+    // width + 1 to allow for the previous newline
+    for (unsigned int row = width; row < pixels_len; row += width + 1)
         pixels[row] = '\n';
 
-    printf("%s", pixels);
-exit(127);
-    // multiply y by (width+1) and add to x
-// set to \n every width. for loop
-    // Store the pix contenets into a string thatll
-    // be strcat'd into img_content
+    // Mark the coordinates
+    while (node_ptr != NULL)
+    {
+        pos = (node_ptr->coord.y * (width + 1)) + node_ptr->coord.x;
+        pixels[pos] = fg;
+
+        node_ptr = node_ptr->next;
+    }
+
     strcat(img_content, pixels);
     return(img_content);
 }
@@ -205,5 +218,6 @@ void writePbm(node_t *head, char *filename)
     invertY(head, height);
 
     img_content = generateContent(head, width, height);
+    printf("%s", img_content);
     free(img_content);
 }
