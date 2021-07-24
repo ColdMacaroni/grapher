@@ -138,7 +138,7 @@ char
     // Mark the coordinates
     while (node_ptr != NULL)
     {
-        // XXX: When the first coord isnt (0, 0), pos ends up being negative. Causing integer overflow and consequently segfault
+        // XXX: When the first coord isnt (0, 0), pos ends up being negative. Causing integer overflow and consequently segfault. UPDATE: Y comes here as negative if first coord isnt 0,0
         pos = (node_ptr->coord.y * (width + 1)) + node_ptr->coord.x;
         pixels[pos] = fg;
 
