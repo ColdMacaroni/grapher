@@ -138,15 +138,11 @@ char
     // Mark the coordinates
     while (node_ptr != NULL)
     {
-        puts("LOOP START"); //DEBUG
+        // XXX: When the first coord isnt (0, 0), pos ends up being negative. Causing integer overflow and consequently segfault
         pos = (node_ptr->coord.y * (width + 1)) + node_ptr->coord.x;
-        printf("Acquire pos: %u\n", pos); //DEBUG
         pixels[pos] = fg;
-        puts("Set pos as fg"); //DEBUG
 
         node_ptr = node_ptr->next;
-        puts("update node ptr"); //DEBUG
-        puts("LOOP END"); //DEBUG
     }
 
     strcat(img_content, pixels);
