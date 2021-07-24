@@ -80,6 +80,12 @@ void invertY(node_t *head, unsigned int height)
     putchar('\n');
 }
 
+char
+*generateContent(node_t *head, unsigned int width, unsigned int height)
+{
+    char contents[(width * height) + height + 1];
+}
+
 void writePbm(node_t *head, char *filename)
 {
     // TODO: Add a padding of 1px
