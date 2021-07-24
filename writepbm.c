@@ -86,8 +86,6 @@ char
     char *img_content;
     char contents[(width * height) + height + 1];
 
-    unsigned int file_len;
-
     /* Alloc for the img file
      * Magic:   3   P1\n
      * Size:    22  len(max_int) is 10 so "10 10 \n"
@@ -95,7 +93,7 @@ char
      */
 
     // Initialize
-    file_len = 3 + 22 + (width * height) + height + 1;
+    const unsigned int file_len = 3 + 22 + (width * height) + height + 1;
     img_content = calloc(sizeof(char), file_len);
     memset(img_content, '\0', sizeof(char) * file_len);
 
@@ -109,8 +107,16 @@ char
 
     /* printf("%s", img_content); */
     {
+        const unsigned int pixels_len = (width * height) + height + 1;
+        char pixels[pixels_len];
+        memset(pixels, '0', sizeof(char) * pixels_len);
+        pixels[pixels_len - 1] = '\0'
+
+        // multiply y by width and add to x
+// set to \n every width. for loop
         // Store the pix contenets into a string thatll
         // be strcat'd into img_content
+        strcat(img_content, size_str);
     }
     return(img_content);
 }
