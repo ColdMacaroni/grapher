@@ -126,30 +126,30 @@ char
     /* printf("%s", img_content); */
     // Calc size plus newlines plus null
     memset(pixels, bg, sizeof(char) * pixels_len);
-puts("memset pixels"); //DEBUG
 
     // Set the terminating null char
     pixels[pixels_len - 1] = '\0';
-puts("terminating \0 for pixels"); //DEBUG
 
     // Set the newlines
     // width + 1 to allow for the previous newline
     for (unsigned int row = width; row < pixels_len; row += width + 1)
         pixels[row] = '\n';
-puts("pixels set newline"); //DEBUG
 
     // Mark the coordinates
     while (node_ptr != NULL)
     {
-        puts("LOOP"); //DEBUG
+        puts("LOOP START"); //DEBUG
         pos = (node_ptr->coord.y * (width + 1)) + node_ptr->coord.x;
+        printf("Acquire pos: %u\n", pos); //DEBUG
         pixels[pos] = fg;
+        puts("Set pos as fg"); //DEBUG
 
         node_ptr = node_ptr->next;
+        puts("update node ptr"); //DEBUG
+        puts("LOOP END"); //DEBUG
     }
 
     strcat(img_content, pixels);
-        puts("strcat pixels into img_contetn"); //DEBUG
     return(img_content);
 }
 
