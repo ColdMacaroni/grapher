@@ -84,7 +84,12 @@ char
 *generateContent(node_t *head, unsigned int width, unsigned int height)
 {
     char *img_content;
-    char contents[(width * height) + height + 1];
+
+    const unsigned int file_len = 3 + 22 + (width * height) + height + 1;
+    char size_str[23];
+
+    const unsigned int pixels_len = (width * height) + height + 1;
+    char pixels[pixels_len];
 
     /* Alloc for the img file
      * Magic:   3   P1\n
@@ -93,31 +98,35 @@ char
      */
 
     // Initialize
-    const unsigned int file_len = 3 + 22 + (width * height) + height + 1;
     img_content = calloc(sizeof(char), file_len);
     memset(img_content, '\0', sizeof(char) * file_len);
 
     // Add magic bytes and size to start of file
     strcat(img_content, "P1\n");
-    {
-        char size_str[23];
-        sprintf(size_str, "%d %d\n", width, height);
-        strcat(img_content, size_str);
-    }
+
+    sprintf(size_str, "%d %d\n", width, height);
+    strcat(img_content, size_str);
 
     /* printf("%s", img_content); */
-    {
-        const unsigned int pixels_len = (width * height) + height + 1;
-        char pixels[pixels_len];
-        memset(pixels, '0', sizeof(char) * pixels_len);
-        pixels[pixels_len - 1] = '\0'
+    // Calc size plus newlines plus null
+    memset(pixels, '0', sizeof(char) * pixels_len);
 
-        // multiply y by width and add to x
+    // Set the terminating null char
+    pixels[pixels_len - 1] = '\0';
+
+    printf("width: %d", width);
+
+    // Set the newlines
+    for (unsigned int row = width ; row <= pixels_len; row += width)
+        pixels[row] = '\n';
+
+    printf("%s", pixels);
+exit(127);
+    // multiply y by (width+1) and add to x
 // set to \n every width. for loop
-        // Store the pix contenets into a string thatll
-        // be strcat'd into img_content
-        strcat(img_content, size_str);
-    }
+    // Store the pix contenets into a string thatll
+    // be strcat'd into img_content
+    strcat(img_content, pixels);
     return(img_content);
 }
 
@@ -141,7 +150,7 @@ void writePbm(node_t *head, char *filename)
     int ptr_x;
     int ptr_y;
 
-    img_content = calloc(sizeof(char), file_len);
+    char *img_content;
 
     min_x = max_x = head->coord.x;
     min_y = max_y = head->coord.y;
