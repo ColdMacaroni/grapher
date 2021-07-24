@@ -1,2 +1,5 @@
 *.o
+*.pbm
+*.png
+testdata
 grapher
