@@ -50,7 +50,9 @@ void shiftCoords(node_t *head, int min_x, int min_y)
     while (tmp != NULL)
     {
         if (shift_x)
+        {
             tmp->coord.x -= min_x;
+        }
 
         if (shift_y)
         {
