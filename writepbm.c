@@ -218,6 +218,11 @@ void writePbm(node_t *head, char *filename)
     invertY(head, height);
 
     img_content = generateContent(head, width, height);
-    printf("%s", img_content);
+
+    // Write file
+    FILE *file = fopen(filename, "w");
+    fputs(img_content, file);
+    fclose(file);
+
     free(img_content);
 }
