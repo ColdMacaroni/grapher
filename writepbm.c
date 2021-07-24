@@ -72,7 +72,7 @@ void invertY(node_t *head, unsigned int height)
 
     while (tmp != NULL)
     {
-        tmp->coord.y = height - tmp->coord.y;
+        tmp->coord.y = height - tmp->coord.y - 1;
         printf("(%d, %d), ", tmp->coord.x, tmp->coord.y);
 
         tmp = tmp->next;
@@ -81,8 +81,11 @@ void invertY(node_t *head, unsigned int height)
 }
 
 char
-*generateContent(node_t *head, unsigned int width, unsigned int height)
+*generateContent(node_t *head, unsigned int width_a, unsigned int height_a)
 {
+    const unsigned int width = width_a;
+    const unsigned int height = height_a;
+
     char *img_content;
 
     const unsigned int file_len = 3 + 22 + (width * height) + height + 1;
