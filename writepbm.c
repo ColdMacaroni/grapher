@@ -83,7 +83,36 @@ void invertY(node_t *head, unsigned int height)
 char
 *generateContent(node_t *head, unsigned int width, unsigned int height)
 {
+    char *img_content;
     char contents[(width * height) + height + 1];
+
+    unsigned int file_len;
+
+    /* Alloc for the img file
+     * Magic:   3   P1\n
+     * Size:    22  len(max_int) is 10 so "10 10 \n"
+     * (width * height) + height for final \n
+     */
+
+    // Initialize
+    file_len = 3 + 22 + (width * height) + height + 1;
+    img_content = calloc(sizeof(char), file_len);
+    memset(img_content, '\0', sizeof(char) * file_len);
+
+    // Add magic bytes and size to start of file
+    strcat(img_content, "P1\n");
+    {
+        char size_str[23];
+        sprintf(size_str, "%d %d\n", width, height);
+        strcat(img_content, size_str);
+    }
+
+    /* printf("%s", img_content); */
+    {
+        // Store the pix contenets into a string thatll
+        // be strcat'd into img_content
+    }
+    return(img_content);
 }
 
 void writePbm(node_t *head, char *filename)
@@ -100,15 +129,13 @@ void writePbm(node_t *head, char *filename)
 
     unsigned int width, height;
 
-    // Initialize min and max variables to first element
     int min_x, max_x;
     int min_y, max_y;
 
     int ptr_x;
     int ptr_y;
 
-    char *img_content;
-    unsigned int file_len;
+    img_content = calloc(sizeof(char), file_len);
 
     min_x = max_x = head->coord.x;
     min_y = max_y = head->coord.y;
@@ -159,26 +186,6 @@ void writePbm(node_t *head, char *filename)
     // Y axis
     invertY(head, height);
 
-    /* Alloc for the img file
-     * Magic:   3   P1\n
-     * Size:    22  len(max_int) is 10 so "10 10 \n"
-     * (width * height) + height for final \n
-     */
-
-    // Initialize
-    file_len = 3 + 22 + (width * height) + height + 1;
-    img_content = calloc(sizeof(char), file_len);
-    memset(img_content, '\0', sizeof(char) * file_len);
-
-    // Add magic bytes and size to start of file
-    strcat(img_content, "P1\n");
-    {
-        char size_str[23];
-        sprintf(size_str, "%d %d\n", width, height);
-        strcat(img_content, size_str);
-    }
-
-    printf("%s", img_content);
-
+    img_content = generateContent(head, width, height);
     free(img_content);
 }
