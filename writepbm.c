@@ -138,7 +138,6 @@ char
     // Mark the coordinates
     while (node_ptr != NULL)
     {
-        // XXX: When the first coord isnt (0, 0), pos ends up being negative. Causing integer overflow and consequently segfault. UPDATE: Y comes here as negative if first coord isnt 0,0
         pos = (node_ptr->coord.y * (width + 1)) + node_ptr->coord.x;
         pixels[pos] = fg;
 
@@ -200,11 +199,22 @@ void writePbm(node_t *head, char *filename)
         node_ptr = node_ptr->next;
     }
 
+    // If 0,0 is not provided: set either min or max to 0. This will
+    // help on getting the image size right
+    if (min_x && max_x)
+    {
+        if (0 < min_x) min_x = 0;
+        else max_x = 0;
+    }
+
+    if (min_y && max_y)
+    {
+        if (0 < min_y) min_y = 0;
+        else max_y = 0;
+    }
+
     // This line prints min and max for x and y in a table
     // printf("\tX\tY\nMin\t%d\t%d\nMax\t%d\t%d\n", min_x, min_y, max_x, max_y);
-
-    /* int width = points[0].x; */
-    /* int height = points[0].y; */
 
     // Calculate width and height
     // Must add one because we are counting 0 as a position.
