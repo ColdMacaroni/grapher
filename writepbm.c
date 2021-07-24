@@ -57,11 +57,11 @@ void shiftCoords(node_t *head, int min_x, int min_y)
             tmp->coord.y -= min_y;
         }
 
-        printf("(%d, %d), ", tmp->coord.x, tmp->coord.y);
+        /* printf("(%d, %d), ", tmp->coord.x, tmp->coord.y); */
 
         tmp = tmp->next;
     }
-    putchar('\n');
+    /* putchar('\n'); */
 }
 
 
@@ -72,12 +72,13 @@ void invertY(node_t *head, unsigned int height)
 
     while (tmp != NULL)
     {
+        // Not sure why -1 but it works
         tmp->coord.y = height - tmp->coord.y - 1;
-        printf("(%d, %d), ", tmp->coord.x, tmp->coord.y);
+        /* printf("(%d, %d), ", tmp->coord.x, tmp->coord.y); */
 
         tmp = tmp->next;
     }
-    putchar('\n');
+    /* putchar('\n'); */
 }
 
 char
@@ -117,10 +118,9 @@ char
     // Set the terminating null char
     pixels[pixels_len - 1] = '\0';
 
-    printf("width: %d", width);
-
     // Set the newlines
-    for (unsigned int row = width ; row <= pixels_len; row += width)
+    // I'm not sure why width has to be +1 but that makes it work
+    for (unsigned int row = width ; row < pixels_len; row += width + 1)
         pixels[row] = '\n';
 
     printf("%s", pixels);
